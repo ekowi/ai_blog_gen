@@ -26,28 +26,11 @@ SECRET_KEY = "django-insecure-e_#(%l1d--)s^lg9-wk@&w54!@f=d6(4-aq+qja(*uce^kid5i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-CORS_ALLOWED_ORIGINS = [
-    "https://ks1dwmfvs7.execute-api.ap-southeast-1.amazonaws.com",
-    "https://*.*.*.amazonaws.com"
-    # Add other trusted origins if needed
-]
+CORS_ALLOWED_ORIGINS = []
 
-ALLOWED_HOSTS = [
-    "*.*.*.amazonaws.com",
-    "127.0.0.1",
-    "*.*.amazonaws.com",
-    "*.amazonaws.com",
-    "localhost",
-    "ks1dwmfvs7.execute-api.ap-southeast-1.amazonaws.com",
-]
+ALLOWED_HOSTS = []
 
-CSRF_TRUSTED_ORIGIN = [
-    "https://*.*.*.amazonaws.com",
-    "127.0.0.1",
-    "https://*.*.amazonaws.com",
-    "https://*.amazonaws.com",
-    "https://ks1dwmfvs7.execute-api.ap-southeast-1.amazonaws.com",
-]
+CSRF_TRUSTED_ORIGIN = []
 
 # Application definition
 
@@ -64,6 +47,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -144,6 +128,10 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -153,3 +141,4 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 LOGIN_URL = "login"
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
