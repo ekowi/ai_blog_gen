@@ -26,8 +26,15 @@ SECRET_KEY = "django-insecure-e_#(%l1d--)s^lg9-wk@&w54!@f=d6(4-aq+qja(*uce^kid5i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "*.amazonaws.com",
+    "127.0.0.1",
+    "localhost",
+]
 
+CSRF_TRUSTED_ORIGIN = [
+    "https://*.amazonaws.com",
+]
 
 # Application definition
 
@@ -39,20 +46,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "blog_generator",
-]
-
-ALLOWED_HOSTS = [
-    "https://ks1dwmfvs7.execute-api.ap-southeast-1.amazonaws.com",
-    "amazonaws.com",
-    "127.0.0.1",
-    "localhost",
-]
-
-CSRF_TRUSTED_ORIGIN = [
-    "https://ks1dwmfvs7.execute-api.ap-southeast-1.amazonaws.com",
-    "amazonaws.com",
-    "127.0.0.1",
-    "localhost",
 ]
 
 
