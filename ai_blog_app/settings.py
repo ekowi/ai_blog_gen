@@ -32,12 +32,10 @@ ALLOWED_HOSTS = [
     "localhost",
     "http://*.amazonaws.com",
     "http://*.127.0.0.1",
+    "127.0.0.1",
 ]
 
-CSRF_TRUSTED_ORIGIN = [
-    "https://*.amazonaws.com",
-    "https://*.127.0.0.1",
-]
+CSRF_TRUSTED_ORIGIN = ["https://*.amazonaws.com", "https://*.127.0.0.1", "127.0.0.1"]
 
 # Application definition
 
