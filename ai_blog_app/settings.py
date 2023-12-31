@@ -42,16 +42,19 @@ INSTALLED_APPS = [
 ]
 
 ALLOWED_HOSTS = [
-    "example.com",
+    "https://ks1dwmfvs7.execute-api.ap-southeast-1.amazonaws.com",
+    "amazonaws.com",
     "127.0.0.1",
     "localhost",
 ]
 
-CSRF_TRUSTED_ORIGIN = ["https://ks1dwmfvs7.execute-api.ap-southeast-1.amazonaws.com"]
+CSRF_TRUSTED_ORIGIN = [
+    "https://ks1dwmfvs7.execute-api.ap-southeast-1.amazonaws.com",
+    "amazonaws.com",
+    "127.0.0.1",
+    "localhost",
+]
 
-if PRODUCTION:
-    CSRF_COOKIE_SECURE = True
-    SESSION_COOKIE_SECURE = True
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
