@@ -27,13 +27,16 @@ SECRET_KEY = "django-insecure-e_#(%l1d--)s^lg9-wk@&w54!@f=d6(4-aq+qja(*uce^kid5i
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "*.amazonaws.com",
-    "127.0.0.1",
+    "https://*.amazonaws.com",
+    "https://*.127.0.0.1",
     "localhost",
+    "http://*.amazonaws.com",
+    "http://*.127.0.0.1",
 ]
 
 CSRF_TRUSTED_ORIGIN = [
     "https://*.amazonaws.com",
+    "https://*.127.0.0.1",
 ]
 
 # Application definition
@@ -139,3 +142,4 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 LOGIN_URL = "login"
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
