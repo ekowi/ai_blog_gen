@@ -41,6 +41,18 @@ INSTALLED_APPS = [
     "blog_generator",
 ]
 
+ALLOWED_HOSTS = [
+    "example.com",
+    "127.0.0.1",
+    "localhost",
+]
+
+CSRF_TRUSTED_ORIGIN = ["https://ks1dwmfvs7.execute-api.ap-southeast-1.amazonaws.com"]
+
+if PRODUCTION:
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = True
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
