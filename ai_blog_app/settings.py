@@ -27,15 +27,21 @@ SECRET_KEY = "django-insecure-e_#(%l1d--)s^lg9-wk@&w54!@f=d6(4-aq+qja(*uce^kid5i
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "https://*.amazonaws.com",
-    "https://*.127.0.0.1",
-    "localhost",
-    "http://*.amazonaws.com",
-    "http://*.127.0.0.1",
+    "https://*.*.*.amazonaws.com",
     "127.0.0.1",
+    "https://*.*.amazonaws.com",
+    "https://*.amazonaws.com",
+    "localhost",
+    "https://ks1dwmfvs7.execute-api.ap-southeast-1.amazonaws.com",
 ]
 
-CSRF_TRUSTED_ORIGIN = ["https://*.amazonaws.com", "https://*.127.0.0.1", "127.0.0.1"]
+CSRF_TRUSTED_ORIGIN = [
+    "https://*.*.*.amazonaws.com",
+    "127.0.0.1",
+    "https://*.*.amazonaws.com",
+    "https://*.amazonaws.com",
+    "https://ks1dwmfvs7.execute-api.ap-southeast-1.amazonaws.com",
+]
 
 # Application definition
 
