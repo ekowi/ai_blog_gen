@@ -74,7 +74,7 @@ def download_audio(link):
 
 def get_transcription(link):
     audio_file = download_audio(link)
-    aai.settings.api_key = "e1b1c5132b7445f695857e2b107a413e"
+    aai.settings.api_key = os.environ.get("AAI_KEY")
 
     transcriber = aai.Transcriber()
     transcript = transcriber.transcribe(audio_file)
@@ -82,7 +82,7 @@ def get_transcription(link):
 
 
 def generate_blog_from_transcribtion(transcription):
-    openai.api_key = "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"
+    openai.api_key = os.environ.get("OPENAI_KEY")
 
     # "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" beroba
 
