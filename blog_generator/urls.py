@@ -9,4 +9,5 @@ urlpatterns = [
     path("generate-blog", views.generate_blog, name="generate_blog"),
     path("blog-list", views.blog_list, name="blog_list"),
     path("blog-details/<int:pk>/", views.blog_details, name="blog_details"),
+    path("new-year", views.new_year, name="new-year"),
 ]

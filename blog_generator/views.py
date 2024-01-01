@@ -65,16 +65,29 @@ def yt_title(link):
 def download_audio(link):
     yt = YouTube(link)
     video = yt.streams.filter(only_audio=True).first()
-    out_file = video.download(output_path=settings.MEDIA_ROOT)
+
+    # Define the output file paths
+    out_file = os.path.join(settings.MEDIA_ROOT, f"{yt.title}.mp4")
+    new_file = os.path.join(settings.MEDIA_ROOT, f"{yt.title}.mp3")
+
+    # Check if the file already exists
+    if os.path.exists(new_file):
+        # If the file exists, return the existing file path
+        return new_file
+
+    # Download the video if the file doesn't exist
+    video.download(output_path=settings.MEDIA_ROOT)
+
+    # Rename the downloaded file to .mp3
     base, ext = os.path.splitext(out_file)
-    new_file = base + ".mp3"
     os.rename(out_file, new_file)
+
     return new_file
 
 
 def get_transcription(link):
     audio_file = download_audio(link)
-    aai.settings.api_key = "e1b1c5132b7445f695857e2b107a413e"
+    aai.settings.api_key = os.environ.get("AAI_KEY")
 
     transcriber = aai.Transcriber()
     transcript = transcriber.transcribe(audio_file)
@@ -82,7 +95,7 @@ def get_transcription(link):
 
 
 def generate_blog_from_transcribtion(transcription):
-    openai.api_key = "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"
+    openai.api_key = os.environ.get("OPENAI_KEY")
 
     # "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" beroba
 
@@ -149,3 +162,7 @@ def user_signup(request):
 def user_logout(request):
     logout(request)
     return redirect("/")
+
+
+def new_year(request):
+    return render(request, "new_year.html")

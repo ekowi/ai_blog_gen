@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Happy New Year 2024</title>
+</head>
+
+<body class="bg-gray-900 flex justify-center items-center h-screen overflow-hidden">
+    <div class="container text-center relative text-white">
+        <div id="text-container" class="text-container z-1">
+            <h1 id="typed-text" class="text-yellow-500 text-3xl font-bold mb-4"></h1>
+            <p id="typed-description" class="text-gray-300 text-lg mb-4"></p>
+            <p id="typed-another-element" class="text-gray-300 text-lg"></p>
+        </div>
+        <div id="fireworks-container" class="absolute w-full h-full top-0 left-0">
+            <!-- Fireworks will be dynamically added here -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const textContainer = document.getElementById('text-container');
+            const fireworksContainer = document.getElementById('fireworks-container');
+
+            const text = "Happy New Year 2024!";
+            const description = "Wishing you a year filled with joy, success, and new opportunities.";
+            const anotherText = "Thank you Mr. Philip for your kind words and support.";
+
+            let indexText = 0;
+            let indexDescription = 0;
+            let indexAnother = 0;
+
+            function typeText() {
+                if (indexText < text.length) {
+                    document.getElementById('typed-text').innerHTML += text.charAt(indexText);
+                    indexText++;
+                    setTimeout(typeText, 100);
+                }
+            }
+
+            function typeDescription() {
+                if (indexDescription < description.length) {
+                    document.getElementById('typed-description').innerHTML += description.charAt(indexDescription);
+                    indexDescription++;
+                    setTimeout(typeDescription, 100);
+                }
+            }
+
+            function typeAnother() {
+                if (indexAnother < anotherText.length) {
+                    document.getElementById('typed-another-element').innerHTML += anotherText.charAt(indexAnother);
+                    indexAnother++;
+                    setTimeout(typeAnother, 100);
+                }
+            }
+
+            // Call the typing functions for each element
+            typeText();
+            typeDescription();
+            typeAnother();
+
+            // Create full-screen fireworks at the center
+            createFireworks();
+
+            function createFireworks() {
+                const fireworks = document.createElement('div');
+                fireworks.classList.add('fireworks', 'bg-cover', 'bg-center', 'opacity-30');
+                fireworks.style.width = '100vw'; // Cover the entire width of the screen
+                fireworks.style.height = '100vh'; // Cover the entire height of the screen
+                fireworks.style.position = 'fixed'; // Fixed position to cover the whole viewport
+                fireworks.style.top = '0';
+                fireworks.style.left = '0';
+                fireworks.style.backgroundImage = "url('{% static 'blog_generator/fireworks.gif' %}')";
+                fireworksContainer.appendChild(fireworks);
+            }
+        });
+    </script>
+</body>
+
+</html>
