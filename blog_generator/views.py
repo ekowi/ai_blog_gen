@@ -11,6 +11,7 @@ from pytube import YouTube
 import assemblyai as aai
 import openai
 from .models import BlogPost
+import shutil
 
 
 # Create your views here.
@@ -50,6 +51,10 @@ def generate_blog(request):
         )
         new_blog_article.save()
 
+        media_root = settings.MEDIA_ROOT
+        shutil.rmtree(media_root)
+        os.makedirs(media_root)
+
         # Return blog article as a response
         return JsonResponse({"content": blog_content})
     else:
@@ -62,26 +67,16 @@ def yt_title(link):
     return title
 
 
+from django.conf import settings
+
+
 def download_audio(link):
     yt = YouTube(link)
     video = yt.streams.filter(only_audio=True).first()
-
-    # Define the output file paths
-    out_file = os.path.join(settings.MEDIA_ROOT, f"{yt.title}.mp4")
-    new_file = os.path.join(settings.MEDIA_ROOT, f"{yt.title}.mp3")
-
-    # Check if the file already exists
-    if os.path.exists(new_file):
-        # If the file exists, return the existing file path
-        return new_file
-
-    # Download the video if the file doesn't exist
-    video.download(output_path=settings.MEDIA_ROOT)
-
-    # Rename the downloaded file to .mp3
+    out_file = video.download(output_path=settings.MEDIA_ROOT)
     base, ext = os.path.splitext(out_file)
+    new_file = base + ".mp3"
     os.rename(out_file, new_file)
-
     return new_file
 
 
