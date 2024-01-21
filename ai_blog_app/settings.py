@@ -56,7 +56,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
-    "django.middleware.common.CommonMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -166,7 +165,8 @@ LOGIN_URL = "login"
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:3000",
-# ]
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # Add your frontend domain here
+    # Add other allowed origins as needed
+]
+CORS_ORIGIN_ALLOW_ALL = True
