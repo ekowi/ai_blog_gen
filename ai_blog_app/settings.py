@@ -166,7 +166,7 @@ LOGIN_URL = "login"
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-]
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:3000",
+# ]
 CORS_ALLOW_ALL_ORIGINS = True
