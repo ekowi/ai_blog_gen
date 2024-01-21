@@ -16,6 +16,7 @@ gunicorn = "^21.2.0"
 pytube = "^15.0.0"
 assemblyai = "^0.20.2"
 openai = "^1.6.1"
+django-cors-headers = "^4.3.1"
 
 
 [build-system]
