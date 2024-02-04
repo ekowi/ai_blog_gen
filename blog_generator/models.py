@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.postgres.fields import ArrayField
 # Create your models here.
 class BlogPost(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -16,8 +17,12 @@ class Product(models.Model):
 
     title = models.CharField(max_length=255)
     description = models.TextField()
+    additionals = ArrayField(
+        models.CharField(max_length=255)
+    )
     price = models.DecimalField(max_digits=10, decimal_places=2)
     category = models.CharField(max_length=255, null=True)
     url = models.URLField(null=True)
+    is_active = models.BooleanField()
 
     
