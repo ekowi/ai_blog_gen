@@ -12,36 +12,47 @@ def get_all_additionals(request):
     data = Additionals.objects.values()
     return JsonResponse(list(data), safe=False)
 
-def product_detail(request, product_id):
+
+def product_detail(request):
     try:
-        product = Product.objects.get(pk=product_id)
-        
-        # Serialize product data
-        product_data = {
-            'id': product.id,
-            'title': product.title,
-            'description': product.description,
-            'price': str(product.price),
-            'category': product.category,
-            'url': product.url,
-            'is_active': product.is_active,
-        }
+        products = Product.objects.all()
 
-        # Serialize associated additional data
-        additional_data_list = []
-        for additional in product.additionals.all():
-            additional_data_list.append({
-                'id': additional.id,
-                'title': additional.title,
-                'description': additional.description,
-            })
+        # List to store combined product and additional data
+        combined_data_list = []
 
-        # Combine product and additional data
-        combined_data = {
-            'product': product_data,
-            'additional_data': additional_data_list,
-        }
+        # Iterate over each product
+        for product in products:
+            # Serialize product data
+            product_data = {
+                "id": product.id,
+                "title": product.title,
+                "description": product.description,
+                "price": str(product.price),
+                "category": product.category,
+                "url": product.url,
+                "is_active": product.is_active,
+            }
 
-        return JsonResponse(combined_data)
+            # Serialize associated additional data
+            additional_data_list = []
+            for additional in product.additionals.all():
+                additional_data_list.append(
+                    {
+                        "id": additional.id,
+                        "title": additional.title,
+                        "description": additional.description,
+                    }
+                )
+
+            # Combine product and additional data
+            combined_data = {
+                "product": product_data,
+                "additional_data": additional_data_list,
+            }
+
+            # Add combined data to the list
+            combined_data_list.append(combined_data)
+
+        return JsonResponse({"products": combined_data_list})
     except Product.DoesNotExist:
-        return JsonResponse({'error': 'Product not found'}, status=404)
+        return JsonResponse({"error": "Products not found"}, status=404)
