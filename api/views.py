@@ -13,7 +13,7 @@ def get_all_additionals(request):
     return JsonResponse(list(data), safe=False)
 
 
-def product_detail(request):
+def product_details(request):
     try:
         products = Product.objects.all()
 
@@ -24,7 +24,7 @@ def product_detail(request):
         for product in products:
             # Serialize product data
             product_data = {
-                "id": product.id,
+                "product_id": product.id,
                 "title": product.title,
                 "description": product.description,
                 "price": str(product.price),
@@ -38,9 +38,10 @@ def product_detail(request):
             for additional in product.additionals.all():
                 additional_data_list.append(
                     {
-                        "id": additional.id,
+                        "additional_id": additional.id,
                         "title": additional.title,
                         "description": additional.description,
+                        "product_id": product.id,
                     }
                 )
 
